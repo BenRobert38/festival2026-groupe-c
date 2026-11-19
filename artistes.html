@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artistes — Horizon 2027</title>
+  <style>
+    /* ---------- Variables de couleurs (identiques à carte.html) ---------- */
+    :root {
+      --fond: #0d0b1a;
+      --fond-carte: #16132b;
+      --texte: #ece9ff;
+      --texte-doux: #a9a2c9;
+      --neon-rose: #ff2e88;
+      --neon-cyan: #27e1d1;
+      --neon-violet: #9b5cff;
+      --neon-jaune: #ffd23f;
+      --bordure: #2e2a4d;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 2rem 0 4rem;
+      background: var(--fond);
+      color: var(--texte);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+
+    .conteneur { max-width: 1000px; margin: 0 auto; padding: 0 1rem; }
+
+    h1 {
+      margin: 0 0 .25rem;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--neon-cyan);
+    }
+
+    .sous-titre { margin: 0 0 2rem; color: var(--texte-doux); }
+
+    /* ---------- La liste déroulante horizontale ---------- */
+    .liste-artistes {
+      display: flex;
+      gap: 1.25rem;
+      margin: 0;
+      padding: .5rem 1rem 1.5rem;
+      list-style: none;
+      overflow-x: auto;            /* défilement horizontal */
+      scroll-snap-type: x mandatory; /* la carte s'aligne quand on s'arrête */
+      scrollbar-color: var(--neon-violet) var(--fond-carte);
+    }
+
+    .liste-artistes > li {
+      flex: 0 0 300px;             /* largeur fixe : les cartes ne se compressent pas */
+      scroll-snap-align: center;
+    }
+
+    /* ---------- Une carte artiste ---------- */
+    .artiste {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      padding: 1.25rem;
+      background: var(--fond-carte);
+      border: 1px solid var(--bordure);
+      border-top: 3px solid var(--neon-violet);
+      border-radius: 12px;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .artiste:hover,
+    .artiste:focus-within {
+      transform: translateY(-4px);
+      border-color: var(--neon-rose);
+    }
+
+    /* Mise en avant des têtes d'affiche */
+    .artiste.tete-affiche {
+      border-top-color: var(--neon-rose);
+      box-shadow: 0 0 18px rgba(255, 46, 136, .25);
+    }
+
+    .artiste h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .style {
+      align-self: flex-start;
+      padding: .2rem .6rem;
+      border: 1px solid var(--neon-cyan);
+      border-radius: 999px;
+      color: var(--neon-cyan);
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .artiste h3 {
+      margin: .4rem 0 0;
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--neon-jaune);
+    }
+
+    .artiste p {
+      margin: 0;
+      color: var(--texte-doux);
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+
+    /* Horaires de passage */
+    .horaires {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: .85rem;
+    }
+
+    .horaires li {
+      display: flex;
+      justify-content: space-between;
+      gap: .5rem;
+      padding: .3rem 0;
+      border-bottom: 1px dashed var(--bordure);
+    }
+
+    .horaires li:last-child { border-bottom: none; }
+    .horaires .jour { color: var(--texte); font-weight: bold; }
+    .horaires .heure { color: var(--neon-cyan); font-variant-numeric: tabular-nums; }
+    .horaires .scene { color: var(--texte-doux); font-size: .8rem; width: 100%; }
+
+    .aide {
+      margin: 0;
+      color: var(--texte-doux);
+      font-size: .85rem;
+      font-style: italic;
+    }
+
+    /* Sur mobile, les cartes prennent presque tout l'écran */
+    @media (max-width: 520px) {
+      .liste-artistes > li { flex-basis: 85vw; }
+    }
+  </style>
+</head>
+<body>
+  <div class="conteneur">
+    <header>
+      <h1>Les artistes</h1>
+      <p class="sous-titre">Horizon 2027 — 4 jours de techno, du warm-up aux têtes d'affiche du dernier soir.</p>
+    </header>
+  </div>
+
+  <main>
+    <section aria-label="Liste des artistes du festival">
+      <!-- Liste déroulante horizontale : on fait défiler vers la droite -->
+      <ul class="liste-artistes">
+
+        <li>
+          <article class="artiste">
+            <h2>Nova Kryon</h2>
+            <span class="style">Techno mélodique</span>
+            <h3>Parcours</h3>
+            <p>Productrice lyonnaise révélée par ses lives sous les halles industrielles, elle mêle nappes de synthés et kicks profonds depuis 2019 et signe en 2025 son premier album salué par la scène européenne.</p>
+            <h3>Sur scène</h3>
+            <ul class="horaires">
+              <li><span class="jour">Jour 1</span><span class="heure">20h00 – 21h30</span></li>
+              <li><span class="scene">Scène Horizon</span></li>
+            </ul>
+          </article>
+        </li>
+
+        <li>
+          <article class="artiste">
+            <h2>Basslith</h2>
+            <span class="style">Hard techno</span>
+            <h3>Parcours</h3>
+            <p>Duo berlinois formé en club, connu pour des sets très physiques à plus de 150 BPM. Après trois EP auto-produits, il tourne depuis deux ans dans les grands festivals de la scène underground.</p>
+            <h3>Sur scène</h3>
+            <ul class="horaires">
+              <li><span class="jour">Jour 1</span><span class="heure">22h00 – 23h30</span></li>
+              <li><span class="scene">Scène Underground</span></li>
+              <li><span class="jour">Jour 3</span><span class="heure">01h00 – 02h30</span></li>
+              <li><span class="scene">Scène Underground</span></li>
+            </ul>
+          </article>
+        </li>
+
+        <li>
+          <article class="artiste">
+            <h2>Céline Orbit</h2>
+            <span class="style">Deep house</span>
+            <h3>Parcours</h3>
+            <p>DJ et crate-digger marseillaise, elle anime depuis dix ans une émission de radio associative. Ses sélections chaudes et groovy en font la spécialiste des fins d'après-midi au soleil.</p>
+            <h3>Sur scène</h3>
+            <ul class="horaires">
+              <li><span class="jour">Jour 2</span><span class="heure">17h00 – 18h30</span></li>
+              <li><span class="scene">Scène Pulse</span></li>
+            </ul>
+          </article>
+        </li>
+
+        <li>
+          <article class="artiste">
+            <h2>Atlas Mirage</h2>
+            <span class="style">Techno hypnotique</span>
+            <h3>Parcours</h3>
+            <p>Projet solo d'un ancien batteur de groupe post-rock, passé aux machines en 2021. Ses lives tout en boucles qui s'étirent sur dix minutes lui ont valu une résidence remarquée à Amsterdam.</p>
+            <h3>Sur scène</h3>
+            <ul class="horaires">
+              <li><span class="jour">Jour 2</span><span class="heure">21h00 – 22h30</span></li>
+              <li><span class="scene">Scène Horizon</span></li>
+            </ul>
+          </article>
+        </li>
+
+        <li>
+          <article class="artiste">
+            <h2>Kuro Lux</h2>
+            <span class="style">Acid techno</span>
+            <h3>Parcours</h3>
+            <p>Figure de la scène de Tokyo arrivée en Europe en 2023, elle ne joue qu'en matériel analogique et improvise l'essentiel de ses sets. Deux maxis sortis cette année sur un label de Rotterdam.</p>
+            <h3>Sur scène</h3>
+            <ul class="horaires">
+              <li><span class="jour">Jour 3</span><span class="heure">19h30 – 21h00</span></li>
+              <li><span class="scene">Scène Pulse</span></li>
+            </ul>
+          </article>
+        </li>
+
+        <li>
+          <article class="artiste">
+            <h2>Vertex Noir</h2>
+            <span class="style">Industrial techno</span>
+            <h3>Parcours</h3>
+            <p>Collectif bruxellois à géométrie variable, né dans les squats artistiques. Il travaille autant le son que la lumière : ses passages se jouent presque dans le noir, ponctués de stroboscopes.</p>
+            <h3>Sur scène</h3>
+            <ul class="horaires">
+              <li><span class="jour">Jour 3</span><span class="heure">23h00 – 00h30</span></li>
+              <li><span class="scene">Scène Horizon</span></li>
+            </ul>
+          </article>
+        </li>
+
+        <li>
+          <article class="artiste tete-affiche">
+            <h2>Solène Ravel</h2>
+            <span class="style">Techno symphonique</span>
+            <h3>Parcours</h3>
+            <p>Pianiste de formation classique devenue productrice, elle joue accompagnée de quatre cordes live. Son dernier album, enregistré avec un orchestre de chambre, l'a installée parmi les grandes têtes d'affiche européennes.</p>
+            <h3>Sur scène</h3>
+            <ul class="horaires">
+              <li><span class="jour">Jour 4</span><span class="heure">21h30 – 23h00</span></li>
+              <li><span class="scene">Scène Horizon — tête d'affiche</span></li>
+            </ul>
+          </article>
+        </li>
+
+        <li>
+          <article class="artiste tete-affiche">
+            <h2>Hélios Protocol</h2>
+            <span class="style">Big room techno</span>
+            <h3>Parcours</h3>
+            <p>Producteur emblématique des quinze dernières années, il a sorti sept albums et rempli les plus grandes salles du continent. Il clôture le festival avec un live inédit conçu pour Horizon 2027.</p>
+            <h3>Sur scène</h3>
+            <ul class="horaires">
+              <li><span class="jour">Jour 4</span><span class="heure">23h30 – 02h00</span></li>
+              <li><span class="scene">Scène Horizon — clôture</span></li>
+            </ul>
+          </article>
+        </li>
+
+      </ul>
+      <div class="conteneur">
+        <p class="aide">Faites défiler la liste vers la droite pour découvrir tous les artistes.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
